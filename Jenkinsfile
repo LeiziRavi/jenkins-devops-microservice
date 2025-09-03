@@ -16,8 +16,8 @@ pipeline {
         jdk 'zulu-11'
     }
     environment {
-        dockerHome = tool 'docker-01'
-        mavenHome = tool 'maven-01'
+        // dockerHome = tool 'docker-01'
+        // mavenHome = tool 'maven-01'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
