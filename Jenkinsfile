@@ -19,7 +19,8 @@ pipeline {
     environment {
         dockerHome = tool 'docker-01'
         mavenHome = tool 'maven-3.3.9'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        javaHome = tool 'zulu-11'
+        PATH = "$dockerHome/bin:$mavenHome/bin:$javaHome/bin:$PATH"
     }
 
     // agent {
