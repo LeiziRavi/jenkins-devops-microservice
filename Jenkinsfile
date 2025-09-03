@@ -11,13 +11,14 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'maven-3.3.9'
-        jdk 'zulu-11'
-    }
+    // tools {
+    //     maven 'maven-3.3.9'
+    //     jdk 'zulu-11'
+    // }
+
     environment {
         dockerHome = tool 'docker-01'
-        // mavenHome = tool 'maven-01'
+        mavenHome = tool 'maven-3.3.9'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
