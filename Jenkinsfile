@@ -16,7 +16,7 @@ pipeline {
         jdk 'zulu-11'
     }
     environment {
-        // dockerHome = tool 'docker-01'
+        dockerHome = tool 'docker-01'
         // mavenHome = tool 'maven-01'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
@@ -61,7 +61,32 @@ pipeline {
                 sh 'mvn failsafe:integration-test failsafe:verify '
             }
         }
-    }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package -DskipTests'
+            }
+        }
+
+        stage('buid docker image') {
+            steps {
+                // docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG
+                script {
+                    dockerImage = docker.build("leiziravi/currency-exchange-devops:${env.BUILD_TAG}")
+                }
+            }}
+
+        stage('push docker image') {
+            steps {
+                script {
+                    docker.withRegistry('', 'dockerhub') {
+                        dockerImage.push()
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+        }
     post {
         always {
             echo 'I am awesome. I run always'
@@ -76,4 +101,4 @@ pipeline {
     // echo 'I run when status changes'
     // }
     }
-}
+    }
