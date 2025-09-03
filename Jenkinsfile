@@ -11,9 +11,13 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven-3.3.9'
+        jdk 'zulu-11'
+    }
     environment {
         dockerHome = tool 'docker-01'
-        mavenHome = tool 'maven-01'
+        // mavenHome = tool 'maven-01'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
@@ -54,7 +58,7 @@ pipeline {
         }
         stage('Integration Test') {
             steps {
-                sh 'mvn failsafe:integration-test failsafe:verify'
+                sh 'mvn failsafe:integration-test failsafe:verify '
             }
         }
     }
