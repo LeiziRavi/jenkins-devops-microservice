@@ -26,11 +26,11 @@ pipeline {
                 // sh 'mvn --version'
                 // sh 'node --version'
                 echo 'build'
-                echo '$PATH'
-                echo 'BUILD_NUMBER - $env.BUILD_NUMBER'
-                echo 'BUILD_ID - $env.BUILD_ID'
-                echo 'BUILD_TAG - $env.BUILD_TAG'
-                echo 'JOB_NAME - $env.JOB_NAME'
+                echo "PATH - $PATH"
+                echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+                echo "BUILD_ID - $env.BUILD_ID"
+                echo "BUILD_TAG - $env.BUILD_TAG"
+                echo "JOB_NAME - $env.JOB_NAME"
             }
         }
         stage('Test') {
